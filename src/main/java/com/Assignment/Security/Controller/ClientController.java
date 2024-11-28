@@ -17,20 +17,21 @@ public class ClientController {
      @Autowired
      private ManageService manageService = new ManageService();
 
-     @GetMapping
 
+    @GetMapping
     public List<Client> getClient(){
           return manageService.getAll();
      }
 
-     @PostMapping("/modify")
 
-     public void addClient(@RequestBody Client client){
+     @PostMapping("/modify")
+     public ResponseEntity<?> addClient(@RequestBody Client client){
           manageService.addClient(client);
+         return  ResponseEntity.ok("Good");
      }
 
-     @PostMapping("/modify/delete/{id}")
 
+     @PostMapping("/modify/delete/{id}")
      public ResponseEntity<?> deleteClient(@PathVariable  String id){
           manageService.removeClient(id);
           return ResponseEntity.ok("Client Deleted");

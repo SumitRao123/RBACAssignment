@@ -3,6 +3,7 @@ package com.Assignment.Security.Config;
 import com.Assignment.Security.Service.CustomUserDetailsService;
 import com.Assignment.Security.utils.JwtFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +40,7 @@ public class SecurityConfig {
         http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/manage/modify/**").hasRole("ADMIN")
+                .requestMatchers("/manage").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -49,6 +50,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/auth/login") // Redirect to login page after logout
                 .deleteCookies("JSESSIONID");
         return http.build();
+
     }
 
     @Bean

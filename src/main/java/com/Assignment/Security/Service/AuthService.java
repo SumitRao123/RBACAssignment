@@ -26,7 +26,7 @@ public class AuthService {
         nuser.setUsername(user.getUsername());
         nuser.setPassword(passwordEncoder.encode(user.getPassword()));
         nuser.setRoles(user.getRoles());
-        userRepository.save(user);
+        userRepository.save(nuser);
     }
 
     // Fetch user details by username

@@ -58,7 +58,7 @@ public class AuthController {
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
             String jwt = jwtHelper.generateToken(username);
 
-//        String token = jwtHelper.createToken(username, Map.of("roles", String.join(",", user.getRoles())));
+
             return ResponseEntity.ok(jwt);
         }catch (Exception ex){
              return (ResponseEntity<?>) ResponseEntity.badRequest();
